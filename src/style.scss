@@ -36,6 +36,10 @@ html {
   transition-duration: 0.15s;
 }
 
+.note-text {
+  overflow-wrap: break-word;
+}
+
 .edit-div {
   padding-top: 20px;
   display: flex;

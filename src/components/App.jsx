@@ -1,58 +1,28 @@
-import React, { useState } from 'react';
-import { produce } from 'immer';
+import React, { useEffect, useState } from 'react';
 import Note from './note';
 import NoteBar from './newnotebar';
+import {
+  deleteNote, addNote, updateNoteDB, onNotesValueChange,
+} from '../services/datastore';
 
 function App() {
-  const [idcount, setIDcount] = useState(3);
   const [notes, setNotes] = useState({
-    id1: {
-      title: 'Note 1',
-      text: 'Body of note 1',
-      x: 100,
-      y: 100,
-      size: 300,
-      zIndex: 0,
-      color: 'lightblue',
-    },
-    id2: {
-      title: 'Note 2',
-      text: 'Body of note 2',
-      x: 230,
-      y: 150,
-      size: 300,
-      zIndex: 0,
-      color: 'lightpink',
-    },
   });
+  useEffect(() => {
+    onNotesValueChange(setNotes);
+  }, []);
   const updateNote = (id, cmd, updatedFields) => {
-    setNotes((prevState) => {
-      return produce(prevState, (draft) => {
-        if (cmd === 'deleteNote') {
-          delete draft[id];
-        } else if (cmd === 'moveNote') {
-          draft[id].x = updatedFields.x;
-          draft[id].y = updatedFields.y;
-        } else if (cmd === 'editInfo') {
-          draft[id].title = updatedFields.title;
-          draft[id].text = updatedFields.text;
-          draft[id].size = updatedFields.size;
-        } else if (cmd === 'addNote') {
-          draft[`id${idcount}`] = {
-            title: 'New note!',
-            text: 'Edit me',
-            x: 0,
-            y: 0, // figure out why this won't start there
-            size: 300,
-            zIndex: 0,
-            color: 'lightblue',
-          };
-          setIDcount(idcount + 1);
-        } else if (cmd === 'changeColor') {
-          draft[id].color = updatedFields.color;
-        }
-      });
-    });
+    if (cmd === 'deleteNote') {
+      deleteNote(id);
+    } else if (cmd === 'moveNote') {
+      updateNoteDB(id, { x: updatedFields.x, y: updatedFields.y });
+    } else if (cmd === 'editInfo') {
+      updateNoteDB(id, { title: updatedFields.title, text: updatedFields.text, size: updatedFields.size });
+    } else if (cmd === 'addNote') {
+      addNote();
+    } else if (cmd === 'changeColor') {
+      updateNoteDB(id, { color: updatedFields.color });
+    }
   };
 
   return (
