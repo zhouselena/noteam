@@ -29,9 +29,8 @@ function App() {
         } else if (cmd === 'moveNote') {
           draft[id].x = updatedFields.x;
           draft[id].y = updatedFields.y;
-        } else if (cmd === 'editTitle') {
+        } else if (cmd === 'editInfo') {
           draft[id].title = updatedFields.title;
-        } else if (cmd === 'editText') {
           draft[id].text = updatedFields.text;
         }
       });
