@@ -20,7 +20,7 @@ export function addNote() {
     title: 'Edit me!',
     text: 'This is a lovely description.',
     x: 200,
-    y: 100,
+    y: -500,
     size: 300,
     zIndex: 0,
     color: 'lightblue',
