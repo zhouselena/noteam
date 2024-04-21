@@ -14,9 +14,9 @@ function Typewriter({ words, delay }) {
       return () => clearTimeout(timeout);
     } else {
       setTimeout(() => {
+        setTypetext('');
         setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
         setTypeindex(0);
-        setTypetext('');
       }, delay * 5);
     }
     return () => {};

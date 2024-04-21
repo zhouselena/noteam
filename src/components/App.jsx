@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Note from './note';
-import NoteBar from './newnotebar';
+import Note from './Note';
+import NoteBar from './Newnotebar';
 import {
   deleteNote, addNote, updateNoteDB, onNotesValueChange,
 } from '../services/datastore';
