@@ -4,7 +4,7 @@ import Note from './note';
 
 function App() {
   const [notes, setNotes] = useState({
-    id1: {
+    id: {
       title: 'Note 1',
       text: 'Body of note 1',
       x: 0,
@@ -21,10 +21,21 @@ function App() {
       zIndex: 0,
     },
   });
-  const updateNote = (id, updatedFields) => {
-    setNotes(produce((draft) => {
-      draft[id] = { ...draft[id], ...updatedFields };
-    }));
+  const updateNote = (id, cmd, updatedFields) => {
+    setNotes((prevState) => {
+      return produce(prevState, (draft) => {
+        if (cmd === 'deleteNote') {
+          delete draft[id];
+        } else if (cmd === 'moveNote') {
+          draft[id].x = updatedFields.x;
+          draft[id].y = updatedFields.y;
+        } else if (cmd === 'editTitle') {
+          draft[id].title = updatedFields.title;
+        } else if (cmd === 'editText') {
+          draft[id].text = updatedFields.text;
+        }
+      });
+    });
   };
 
   return (
