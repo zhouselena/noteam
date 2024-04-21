@@ -9,9 +9,50 @@ html {
 }
 
 .note {
-  background: orange;
+  background: var(--note-color);
+  padding: 20px;
   width: var(--note-size);
   height: var(--note-size);
+  border-radius: 15px;
+  box-shadow: 7px 5px 5px grey;
 }
 
-/* note styling */
+.navbar {
+  display: flex;
+  column-gap: 8px;
+  justify-content: end;
+  align-items: center;
+}
+
+.icon-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.editTitle {
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  font-size: 22px;
+  resize: none;
+}
+
+// figure out resize, and resize if text is super long
+.editText {
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  resize: none;
+}
+
+.new-note {
+  padding: 40px;
+}
+
+.add-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  border-color: transparent;
+  background-color: lightgrey;
+  float: inline-end;
+}

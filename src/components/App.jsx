@@ -13,6 +13,7 @@ function App() {
       y: 100,
       size: 300,
       zIndex: 0,
+      color: 'orange',
     },
     id2: {
       title: 'Note 2',
@@ -21,6 +22,7 @@ function App() {
       y: 150,
       size: 300,
       zIndex: 0,
+      color: 'pink',
     },
   });
   const updateNote = (id, cmd, updatedFields) => {
@@ -42,6 +44,7 @@ function App() {
             y: 0, // figure out why this won't start there
             size: 300,
             zIndex: 0,
+            color: 'lightblue',
           };
           setIDcount(idcount + 1);
         }
