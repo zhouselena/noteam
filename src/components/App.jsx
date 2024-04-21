@@ -13,7 +13,7 @@ function App() {
       y: 100,
       size: 300,
       zIndex: 0,
-      color: 'orange',
+      color: 'lightblue',
     },
     id2: {
       title: 'Note 2',
@@ -22,7 +22,7 @@ function App() {
       y: 150,
       size: 300,
       zIndex: 0,
-      color: 'pink',
+      color: 'lightpink',
     },
   });
   const updateNote = (id, cmd, updatedFields) => {
@@ -36,6 +36,7 @@ function App() {
         } else if (cmd === 'editInfo') {
           draft[id].title = updatedFields.title;
           draft[id].text = updatedFields.text;
+          draft[id].size = updatedFields.size;
         } else if (cmd === 'addNote') {
           draft[`id${idcount}`] = {
             title: 'New note!',
@@ -47,6 +48,8 @@ function App() {
             color: 'lightblue',
           };
           setIDcount(idcount + 1);
+        } else if (cmd === 'changeColor') {
+          draft[id].color = updatedFields.color;
         }
       });
     });

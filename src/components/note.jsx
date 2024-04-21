@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import ReactMarkdown from 'react-markdown';
+import TextAreaAutosize from 'react-textarea-autosize';
 
 function Note(props) {
   const [edit, setEdit] = useState(false);
@@ -10,15 +11,36 @@ function Note(props) {
     props.updateNote(props.id, 'moveNote', { x: data.x, y: data.y });
   };
   const handleSave = () => {
-    props.updateNote(props.id, 'editInfo', { title, text });
+    // fix this for autoresize
+    const textlength = text.length * 225;
+    const newSize = Math.max(300, Math.sqrt(textlength));
+    props.updateNote(props.id, 'editInfo', { title, text, size: newSize });
     setEdit(!edit);
   };
   const handleDelete = () => {
     props.updateNote(props.id, 'deleteNote', {});
   };
+  const handleColorpink = () => {
+    props.updateNote(props.id, 'changeColor', { color: 'lightpink' });
+  };
+  const handleColorblue = () => {
+    props.updateNote(props.id, 'changeColor', { color: 'lightblue' });
+  };
+  const handleColorgreen = () => {
+    props.updateNote(props.id, 'changeColor', { color: '#c5ffc5' });
+  };
   const renderToolBar = () => {
     return (
       <div className="navbar">
+        <button type="button" onClick={handleColorpink} className="color-button" aria-label="Color" id="pink">
+          <span className="dot" />
+        </button>
+        <button type="button" onClick={handleColorblue} className="color-button" aria-label="Color" id="blue">
+          <span className="dot" />
+        </button>
+        <button type="button" onClick={handleColorgreen} className="color-button" aria-label="Color" id="green">
+          <span className="dot" />
+        </button>
         {edit ? (
           <button type="button" onClick={handleSave} className="icon-button" aria-label="Save">
             <i className="fa-solid fa-xl fa-check" />
@@ -49,14 +71,14 @@ function Note(props) {
       <div className="note" style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color }}>
         {renderToolBar()}
         {edit ? (
-          <div className="note-div">
-            <textarea className="editTitle" value={title} onChange={(e) => setTitle(e.target.value)}>{props.note.title}</textarea>
-            <textarea className="editText" value={text} onChange={(e) => setText(e.target.value)}>{props.note.text}</textarea>
+          <div className="edit-div">
+            <TextAreaAutosize className="editTitle" value={title} onChange={(e) => setTitle(e.target.value)} minRows={1}>{props.note.title}</TextAreaAutosize>
+            <TextAreaAutosize className="editText" value={text} onChange={(e) => setText(e.target.value)} minRows={3}>{props.note.text}</TextAreaAutosize>
           </div>
         ) : (
-          <div className="note-div">
+          <div className="display-div">
             <h1>{props.note.title}</h1>
-            <ReactMarkdown>{props.note.text || ''}</ReactMarkdown>
+            <ReactMarkdown class="note-text">{props.note.text || ''}</ReactMarkdown>
           </div>
         )}
       </div>
