@@ -14,7 +14,7 @@ html {
   width: var(--note-size);
   height: var(--note-size);
   border-radius: 15px;
-  box-shadow: 7px 5px 5px grey;
+  box-shadow: 6px 5px 5px lightgrey;
 }
 
 .navbar {
@@ -27,6 +27,13 @@ html {
 .icon-button {
   background-color: transparent;
   border-color: transparent;
+  cursor: pointer;
+}
+
+.icon-button:hover,
+.icon-button:active {
+  color: white;
+  transition-duration: 0.15s;
 }
 
 .editTitle {
@@ -53,6 +60,13 @@ html {
   height: 60px;
   border-radius: 50px;
   border-color: transparent;
-  background-color: lightgrey;
+  background-color: lightgray;
   float: inline-end;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  color: white;
+  box-shadow: 2px 3px 3px grey;
+  transition-duration: 0.15s;
 }

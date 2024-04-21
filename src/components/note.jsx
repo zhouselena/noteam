@@ -6,13 +6,8 @@ function Note(props) {
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(props.note.title);
   const [text, setText] = useState(props.note.text);
-  const [drag, setDrag] = useState(false);
   const handleDrag = (e, data) => {
-    setDrag(true);
     props.updateNote(props.id, 'moveNote', { x: data.x, y: data.y });
-  };
-  const handleStopDrag = () => {
-    setDrag(false);
   };
   const handleSave = () => {
     props.updateNote(props.id, 'editInfo', { title, text });
@@ -33,11 +28,7 @@ function Note(props) {
             <i className="fa-solid fa-xl fa-pen-to-square" />
           </button>
         )}
-        {drag ? (
-          <i className="fa-solid fa-lg fa-up-down-left-right" style={{ color: 'white' }} />
-        ) : (
-          <i className="fa-solid fa-lg fa-up-down-left-right" />
-        )}
+        <i className="fa-solid fa-lg fa-up-down-left-right icon-button" />
         <button type="button" onClick={handleDelete} className="icon-button" aria-label="Delete">
           <i className="fa fa-xl fa-trash-o" />
         </button>
@@ -54,7 +45,6 @@ function Note(props) {
         x: props.note.x, y: props.note.y, width: 200, height: 200,
       }}
       onDrag={handleDrag}
-      onStop={handleStopDrag}
     >
       <div className="note" style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color }}>
         {renderToolBar()}
