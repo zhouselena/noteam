@@ -1,9 +1,17 @@
 body,
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: sans-serif;
   height: 100%;
 }
 
 :root {
   text-size-adjust: 100%;
 }
+
+.note {
+  background: orange;
+  width: var(--note-size);
+  height: var(--note-size);
+}
+
+/* note styling */

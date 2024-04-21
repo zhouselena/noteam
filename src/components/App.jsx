@@ -9,16 +9,16 @@ function App() {
     id1: {
       title: 'Note 1',
       text: 'Body of note 1',
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 100,
       size: 300,
       zIndex: 0,
     },
     id2: {
       title: 'Note 2',
       text: 'Body of note 2',
-      x: 50,
-      y: 50,
+      x: 230,
+      y: 150,
       size: 300,
       zIndex: 0,
     },
@@ -39,7 +39,7 @@ function App() {
             title: 'New note!',
             text: 'Edit me',
             x: 0,
-            y: 0,
+            y: 0, // figure out why this won't start there
             size: 300,
             zIndex: 0,
           };
