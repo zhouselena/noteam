@@ -31,13 +31,17 @@ function Note(props) {
         </button>
         {edit ? (
           <div className="note-div">
-            <button type="button" onClick={handleSave}>Save</button>
+            <button type="button" onClick={handleSave} className="icon-button" aria-label="Save">
+              <i className="fa-solid fa-check" />
+            </button>
             <textarea value={title} onChange={(e) => setTitle(e.target.value)}>{props.note.title}</textarea>
             <textarea value={text} onChange={(e) => setText(e.target.value)}>{props.note.text}</textarea>
           </div>
         ) : (
           <div className="note-div">
-            <button type="button" onClick={() => setEdit(!edit)}>Edit</button>
+            <button type="button" onClick={() => setEdit(!edit)} className="icon-button" aria-label="Edit">
+              <i className="fa-solid fa-pen-to-square" />
+            </button>
             <h1>{props.note.title}</h1>
             <p>{props.note.text}</p>
           </div>
