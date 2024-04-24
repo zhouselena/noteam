@@ -20,7 +20,9 @@ function Note(props) {
     setEdit(!edit);
   };
   const handleClickZ = () => {
-    props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
+    if (props.id.zIndex) {
+      props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
+    }
   };
   const handleDelete = () => {
     props.updateNote(props.id, 'deleteNote', {});
