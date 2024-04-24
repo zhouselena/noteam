@@ -19,6 +19,9 @@ function Note(props) {
     props.updateNote(props.id, 'editInfo', { title, text });
     setEdit(!edit);
   };
+  const handleClickZ = () => {
+    props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
+  };
   const handleDelete = () => {
     props.updateNote(props.id, 'deleteNote', {});
   };
@@ -78,6 +81,7 @@ function Note(props) {
         width={props.note.size}
         height={props.note.size}
         onResize={onResize}
+        onClick={handleClickZ}
         style={{ '--note-size': `${props.note.size}px` }}
       >
         <div className="note"
