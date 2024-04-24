@@ -16,9 +16,6 @@ function Note(props) {
   };
   const handleSave = () => {
     // fix this for autoresize
-    // const textlength = text.length * 225;
-    // const newSize = Math.max(300, Math.sqrt(textlength));
-    // props.updateNote(props.id, 'editInfo', { title, text, size: newSize });
     props.updateNote(props.id, 'editInfo', { title, text });
     setEdit(!edit);
   };

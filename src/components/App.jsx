@@ -39,7 +39,7 @@ function App() {
   };
 
   return (
-    <div className="overall-app">
+    <div className="noteboard">
       <NoteBar updateNote={updateNote} />
       {notes && Object.entries(notes).map(([id, note]) => {
         return <Note id={id} note={note} updateNote={updateNote} />;
