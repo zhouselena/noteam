@@ -17,18 +17,22 @@ function App() {
     } else if (cmd === 'moveNote') {
       updateNoteDB(id, { x: updatedFields.x, y: updatedFields.y });
     } else if (cmd === 'editInfo') {
-      updateNoteDB(id, { title: updatedFields.title, text: updatedFields.text, size: updatedFields.size });
+      updateNoteDB(id, { title: updatedFields.title, text: updatedFields.text });
     } else if (cmd === 'addNote') {
       addNote();
     } else if (cmd === 'changeColor') {
       updateNoteDB(id, { color: updatedFields.color });
+    } else if (cmd === 'updateSize') {
+      console.log(updatedFields.size);
+      console.log(id);
+      updateNoteDB(id, { size: updatedFields.size });
     }
   };
 
   return (
-    <div>
+    <div className="overall-app">
       <NoteBar updateNote={updateNote} />
-      {Object.entries(notes).map(([id, note]) => {
+      {notes && Object.entries(notes).map(([id, note]) => {
         return <Note id={id} note={note} updateNote={updateNote} />;
       })}
     </div>

@@ -1,7 +1,6 @@
 body,
 html {
   font-family: sans-serif;
-  height: 100%;
 }
 
 :root {
@@ -9,6 +8,10 @@ html {
 }
 
 .note {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
   background: var(--note-color);
   padding: 20px;
   width: var(--note-size);
@@ -17,11 +20,19 @@ html {
   box-shadow: 6px 5px 5px lightgrey;
 }
 
+.note-content {
+  overflow: auto;
+}
+
 .navbar {
+  position: sticky;
+  top: 0;
   display: flex;
   column-gap: 8px;
   justify-content: end;
   align-items: center;
+  background-color: var(--note-color);
+  box-shadow: 0px -20px var(--note-color);
 }
 
 .icon-button {
@@ -55,7 +66,6 @@ html {
   resize: none;
 }
 
-// figure out resize, and resize if text is super long
 .editText {
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -121,4 +131,30 @@ html {
 .color-button:hover {
   border-color: rgb(0, 0, 0);
   transition-duration: 0.2s;
+}
+
+.react-resizable {
+  position: relative;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  box-sizing: border-box;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2IDYiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiNmZmZmZmYwMCIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iNnB4Ij48ZyBvcGFjaXR5PSIwLjMwMiI+PHBhdGggZD0iTSA2IDYgTCAwIDYgTCAwIDQuMiBMIDQgNC4yIEwgNC4yIDQuMiBMIDQuMiAwIEwgNiAwIEwgNiA2IEwgNiA2IFoiIGZpbGw9IiMwMDAwMDAiLz48L2c+PC9zdmc+');
+  background-position: bottom right;
+  padding: 0 3px 3px 0;
+}
+
+.react-resizable-handle-se {
+  position: fixed;
+  // top: var(--note-size)px;
+  // left: var(--note-size)px;
+  bottom: 0px;
+  right: 0px;
+  // align-self: flex-end;
+  cursor: se-resize;
 }

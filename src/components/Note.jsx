@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import ReactMarkdown from 'react-markdown';
 import TextAreaAutosize from 'react-textarea-autosize';
+import { Resizable } from 'react-resizable';
 
 function Note(props) {
   const [edit, setEdit] = useState(false);
@@ -12,9 +13,10 @@ function Note(props) {
   };
   const handleSave = () => {
     // fix this for autoresize
-    const textlength = text.length * 225;
-    const newSize = Math.max(300, Math.sqrt(textlength));
-    props.updateNote(props.id, 'editInfo', { title, text, size: newSize });
+    // const textlength = text.length * 225;
+    // const newSize = Math.max(300, Math.sqrt(textlength));
+    // props.updateNote(props.id, 'editInfo', { title, text, size: newSize });
+    props.updateNote(props.id, 'editInfo', { title, text });
     setEdit(!edit);
   };
   const handleDelete = () => {
@@ -58,30 +60,54 @@ function Note(props) {
 
     );
   };
+  const onResize = (event, { node, size, handle }) => {
+    props.updateNote(props.id, 'updateSize', { size: Math.min(Math.max(200, Math.max(size.height, size.width)), 700) });
+  };
   return (
     <Draggable
       handle=".fa-up-down-left-right"
       grid={[5, 5]} // snapping to grid pixels
       defaultPosition={{ x: 20, y: 20 }} // if no position given
       position={{
-        x: props.note.x, y: props.note.y, width: 200, height: 200,
+        x: props.note.x, y: props.note.y,
       }}
       onDrag={handleDrag}
     >
-      <div className="note" style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color }}>
-        {renderToolBar()}
-        {edit ? (
-          <div className="edit-div">
-            <TextAreaAutosize className="editTitle" value={title} onChange={(e) => setTitle(e.target.value)} minRows={1}>{props.note.title}</TextAreaAutosize>
-            <TextAreaAutosize className="editText" value={text} onChange={(e) => setText(e.target.value)} minRows={3}>{props.note.text}</TextAreaAutosize>
+      <Resizable
+        width={props.note.size}
+        height={props.note.size}
+        onResize={onResize}
+        style={{ '--note-size': `${props.note.size}px` }}
+      >
+        <div className="note"
+          style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color }}
+        >
+          <div className="note-content">
+            {renderToolBar()}
+            {edit ? (
+              <div className="edit-div">
+                <TextAreaAutosize className="editTitle"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  minRows={1}
+                >{props.note.title}
+                </TextAreaAutosize>
+                <TextAreaAutosize className="editText"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  minRows={3}
+                >{props.note.text}
+                </TextAreaAutosize>
+              </div>
+            ) : (
+              <div className="display-div">
+                <h1>{props.note.title}</h1>
+                <ReactMarkdown class="note-text">{props.note.text || ''}</ReactMarkdown>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="display-div">
-            <h1>{props.note.title}</h1>
-            <ReactMarkdown class="note-text">{props.note.text || ''}</ReactMarkdown>
-          </div>
-        )}
-      </div>
+        </div>
+      </Resizable>
     </Draggable>
   );
 }

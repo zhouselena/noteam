@@ -19,8 +19,8 @@ export function addNote() {
   database.ref('notes').push({
     title: 'Edit me!',
     text: 'This is a lovely description.',
-    x: 200,
-    y: -500,
+    x: 0,
+    y: 0,
     size: 300,
     zIndex: 0,
     color: 'lightblue',
