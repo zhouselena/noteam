@@ -2,7 +2,7 @@
 
 _Noteam_ is a collaborative notes app where users can post stickies and watch as others write notes in real time. _Noteam_ supports markdown and serves as a fun alternative to other common notes apps.
 
-[deployed url](https://lab3-react-notes-zhouselena.onrender.com/)
+[deployed url](https://noteam.onrender.com/)
 
 ## What Worked Well
 
