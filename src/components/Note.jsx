@@ -11,6 +11,9 @@ function Note(props) {
   const handleDrag = (e, data) => {
     props.updateNote(props.id, 'moveNote', { x: data.x, y: data.y });
   };
+  const handleDragStart = (e, data) => {
+    props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
+  };
   const handleSave = () => {
     // fix this for autoresize
     // const textlength = text.length * 225;
@@ -72,6 +75,7 @@ function Note(props) {
         x: props.note.x, y: props.note.y,
       }}
       onDrag={handleDrag}
+      onStart={handleDragStart}
     >
       <Resizable
         width={props.note.size}
@@ -80,7 +84,7 @@ function Note(props) {
         style={{ '--note-size': `${props.note.size}px` }}
       >
         <div className="note"
-          style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color }}
+          style={{ '--note-size': `${props.note.size}px`, '--note-color': props.note.color, '--note-zIndex': props.note.zIndex }}
         >
           <div className="note-content">
             {renderToolBar()}

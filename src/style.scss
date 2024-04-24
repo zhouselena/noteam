@@ -16,6 +16,7 @@ html {
   padding: 20px;
   width: var(--note-size);
   height: var(--note-size);
+  z-index: var(--note-zIndex);
   border-radius: 15px;
   box-shadow: 6px 5px 5px lightgrey;
 }

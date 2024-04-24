@@ -15,14 +15,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-export function addNote() {
+export function addNote(z) {
   database.ref('notes').push({
     title: 'Edit me!',
     text: 'This is a lovely description.',
     x: 0,
     y: 0,
     size: 300,
-    zIndex: 0,
+    zIndex: z,
     color: 'lightblue',
   });
 }
