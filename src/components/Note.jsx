@@ -20,12 +20,11 @@ function Note(props) {
     setEdit(!edit);
   };
   const handleClickZ = () => {
-    if (props.id.zIndex) {
-      props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
-    }
+    props.updateNote(props.id, 'endMoveNote', { zIndex: props.note.zIndex });
   };
-  const handleDelete = () => {
+  const handleDelete = (event) => {
     props.updateNote(props.id, 'deleteNote', {});
+    event.stopPropagation();
   };
   const handleColorpink = () => {
     props.updateNote(props.id, 'changeColor', { color: 'lightpink' });
